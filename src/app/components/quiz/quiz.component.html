@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="col text-center d-flex flex-column">
+        <form>
+            <h4>Seleccione</h4>
+            <mat-form-field appearance="fill">
+                <mat-label>Musica Favorita</mat-label>
+                <mat-select [(ngModel)]="selectedValue" name="quiz">
+                    <mat-option *ngFor="let quiz of quizes" [value]="quiz.value">
+                        {{quiz.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <p> Categoria Seleccionada: {{selectedValue}} </p>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                    placeholder="holat@yopmail.com">
+                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                    Porfavor ingrese su correo
+                </mat-error>
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Email es <strong>requerido</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="example-button-row">
+                <button mat-flat-button color="primary" (click)="sendQuiz()">Primary</button>
+            </div>
+        </form>
+
+        <h3 class="error" *ngIf="hasError">{{messageError}}</h3>
+        <h3 class="success" *ngIf="sended">{{messageSuccess}}</h3>
+
+    </div>
+</div>
